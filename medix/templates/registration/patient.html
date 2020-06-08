@@ -1,0 +1,110 @@
+{% extends 'layout/layout.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+
+<main>
+    <div id="hero_register">
+        <div class="container margin_120_95">           
+            <div class="row">
+                 <p>{{insurance_form.errors}}{{user_form.errors}}</p>
+                <div class="col-lg-4 ml-auto">
+                    <div class="box_form">
+                        <div id="message-register"></div>
+                        <form method="POST" role="form" enctype="multipart/form-data">{% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="form-group">
+                                        <h2 class="coming_soon">Coming Soon</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label for="first_name">First Name</label><br>
+                                        {{user_form.first_name}}<br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="last_name">Last Name</label><br>
+                                        {{user_form.last_name}}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="email">Email</label><br>
+                                        {{user_form.email}}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label><br>
+                                        {{patient_form.gender}}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">National Identification Number</label><br>
+                                        {{patient_form.national_identification_number}}
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label><br>
+                                        {{patient_form.phone}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="password">Password</label><br>
+                                        {{user_form.password}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <p><input type="checkbox" name="accept" required>Agree to Terms of use checkbox</p>
+                                    </div>
+                                </div>
+                            </div>-->
+
+                        <div>
+                        <a href="{% url 'users:registration-step1' %}">
+                        <input type="button" class="btn_1" value="Back" >
+                        </a>
+                        </div>
+
+                        </form>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</main>
+
+{% endblock %}

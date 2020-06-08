@@ -1,0 +1,286 @@
+{% extends 'layout/profile_layout.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+	<main>
+		<div id="breadcrumb">
+			<div class="container">
+				
+			</div>
+		</div>
+		<!-- /breadcrumb -->
+
+		<div class="container margin_60">
+			<div class="row">
+				<div class="col-xl-8 col-lg-8">
+					<nav id="secondary_nav">
+						<div class="container">
+							<ul class="clearfix">
+								<li><a href="#section_1" class="active"></a></li>
+								<li><a href="#section_2"></a></li>
+								<li><a href="#sidebar"></a></li>
+							</ul>
+						</div>
+					</nav>
+					<div id="section_1">
+						<div class="box_general_3">
+							<div class="profile">
+								<div class="row">
+									<div class="col-lg-5 col-md-4">
+										<figure>
+											<div class="avatar-preview">
+		                                      {% if  object.image %}
+		                                        
+		                                        <img src="{{object.image.url}}">
+		                                      {% elif object.gender == 1 %}
+	                                        <img src="{% static 'html_menu_1/img/female_image.jpeg' %}">
+	                                      {% else %}
+	                                        <img src="{% static 'html_menu_1/img/male_image.jpeg' %}">
+	                                      {% endif %}
+		                                      <div id="imagePreview" style="background-image: url(../../../static/html_menu_1/img/female.jpg);">
+
+		                                    </div>
+										</figure>
+									</div>
+									<div class="col-lg-7 col-md-8">
+										 
+										<small>{{object.user.profile.get_practice_display}}</small>
+										<h1>{{object.full_name}}</h1>
+										
+										<ul class="contacts">
+											<li>
+												<h6>Phone</h6><a>{{object.user.profile.phone}}</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+							<hr>
+							
+							<!-- /profile -->
+							<div class="indent_title_in">
+								<i class="pe-7s-user"></i>
+								<h3>Professional statement</h3>
+								
+							</div>
+							<div class="wrapper_indent">
+								<h6>Specializations</h6>
+								<p>{{object.user.profile.description}}</p>
+							</div>
+							<!-- /wrapper indent -->
+
+							<hr>
+
+							<div class="indent_title_in">
+								<i class="pe-7s-news-paper"></i>
+								<h3>Education</h3>
+								<p></p>
+							</div>
+							<div class="wrapper_indent">
+								{% for detail in education %}
+								<ul class="list_edu">
+									<li><strong>{{detail.qualification}}</strong></li>
+								</ul>
+								{% endfor %}
+							</div>
+							<!--  End wrapper indent -->
+
+							<hr>
+
+							<div class="indent_title_in">
+								<i class="pe-7s-cash"></i>
+								<h3>Items & Prices</h3>
+								<div class="popup_main">
+                                    <a class="open_popup price_list">Click here for price request</a>
+                                    <div class="popup_body">
+                                      <div class="popup_back"></div>
+                                        <div class="popup_contain popup_width">
+                                        <div class="popuptitle">
+                                            Email
+                                            <div class="popup_close">x</div>
+                                        </div>
+                                          <div class="popupbody">
+                                            <ul class="contacts">
+                                            <h6>Email</h6>
+                                            <input type="text" value="" name="email" id="email" placeholder="Enter Email">
+                                            </ul>
+                                          </div>
+                                           <div class="popupfooter">
+                                               <button data-id="{{object.user.profile.id}}" data-url="{% url 'users:send-email' %}" class="send_email save_btncss">Submit</button> 
+                                           </div>
+                                           
+                                        </div>
+                                    </div>
+                                  </div>  
+							</div>
+							<div class="wrapper_indent">
+								<div class="table-responsive">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Item</th>
+											<th>Price</th>
+										</tr>
+									</thead>
+									<tbody>
+									{% for detail in product %}	
+										<tr>
+											<td>{{detail.item}}</td>
+											{% if detail.on_request == True %}
+											<td>On Request</td>
+											{% endif %}
+											{% if detail.on_request == False %}
+											<td>{{detail.price}}</td>
+											{% endif %}
+										</tr>
+										
+									{% endfor %}
+									</tbody>
+								</table>
+								</div>
+							</div>
+							<!--  /wrapper_indent -->
+							 <hr>
+							 <div class="indent_title_in">
+                                <i class="pe-7s-map-marker"></i>
+                                <h3>Location & Trading Hours</h3>                                        
+                            </div>
+                            <div class="wrapper_indent padding_bottom">
+                                <ul class="">
+                                    {% for val in opratHour %}                                       
+                                    <strong>                                      
+                                    {% ifchanged val.location.location %}
+                                        {{val.location.location}}
+                                        {% if val.location.mobility == True %}
+                                        <input type="checkbox" name="mobility" value="{{val.location.mobility}}" class="homVist mobVist" checked>Mobility
+                                        {% else %}
+                                        <input type="checkbox" name="mobility" value="{{val.location.mobility}}" class="homVist mobVist">Mobility
+                                    	{% endif %}
+                                    {% endifchanged %}
+                                    </strong>  
+                                    <li id="location_li_{{val.location.id}}">
+                                        {% if val.open_time != None and val.get_close_time_display != '00:00 AM' and val.status == True %}
+                                          {{val.day}}-{{val.get_open_time_display}}-{{val.get_close_time_display}}
+
+                                        {% elif val.get_close_time_display == '00:00 AM' and val.status == True %}
+                                        {{val.day}}-{{val.get_open_time_display}}
+                                        {% else %}
+                                          {{val.day}}-Closed
+                                        {%endif%} 
+                             
+                                    </li>
+                                    
+                                      {% endfor %} 
+                                      
+                                    </ul>
+
+                                </div>
+                            <hr>
+
+                            <div class="wrapper_indent">
+                                <p></p>
+                                {% for info in keywords %}
+                                                             
+                                        {{info.keyword}}     
+                                {% endfor %} 
+                                <ul class="" id="delekeyul">
+                                    {% for key in keyword %}
+                                    {% if key.keyword != None %}
+                                    
+                                    <li class="popup_spanlist"><span id="rmoveChip"> {{key.keyword}} <a data-id="{{key.id}}" data-url="{% url 'users:delete-keyword' %}" class="delete_keyword chipsCLose" >×</a></span></li>
+                                    
+                                    <!--<a data-id="{{request.user.profile.id}}" data-url="{% url 'users:delete-keyword' %}" class="delete_keyword popup_main" >
+                                       <img src="../../../static/html_menu_1/img/delete.png">
+                                    </a>
+
+                                    <li class="popup_spanlist"><span id="rmoveChip"> {{key.keyword}} <i class="chipsCLose">×</i></span></li>
+                                     -->
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <hr>
+
+                            <div class="indent_title_in doctor_div">
+                               
+                               
+                            </div>
+                            <div class="wrapper_indent doctor_div">
+                                <div>
+                                    <ul>
+                                    	{% if  serviceMember %}
+
+                                        {% for service in serviceMember %}
+
+                                            {% if service.is_accept == 1 %}
+                                            {% if forloop.first %} 
+                                             <h5>Associated Institutions</h5>
+                                             {% endif %}
+                                                <li>-{{service.service_provider.profile.trading_name}} </li>
+                                           
+                                            {% endif %}
+                                        {%endfor%}
+                                     {% else %}
+                                     <h5>Not Associated To Any Institutions</h5>
+                                     {% endif %}
+
+                                    </ul>
+                                </div> 
+                            </div>
+						</div>
+						<!-- /section_1 -->
+					</div>
+					<!-- /box_general -->
+
+					
+					<!-- /section_2 -->
+				</div>
+				<!-- /col -->
+				
+				<!-- /asdide -->
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</main>
+	<!-- /main -->
+	
+	<div id="toTop"></div>
+	<!-- Back to top button -->
+<script type="text/javascript">
+    $(".open_popup").click(function () {
+   $(this).parent(".popup_main").children(".popup_body").addClass("popup_body_show");
+   });
+ $(".popup_close").click(function () {
+   $(".popup_body").removeClass("popup_body_show");
+   });
+ $(".popup_back").click(function () {
+   $(".popup_body").removeClass("popup_body_show");
+   });
+$('.mobVist').attr('disabled',true);
+$(document).on("click", ".send_email", function(e){
+    e.preventDefault();
+    url = $(this).data('url');
+    profile_id = $(this).data('id');
+    email = $("#email").val();
+    $.ajax({
+        type: "POST",
+        url: url,
+        headers:{
+            "X-CSRFToken": '{{csrf_token}}' 
+        },
+        dataType: "json",
+        data: {"profile_id":profile_id, 'email':email},
+        success: function(response) {
+                if(response.status == 200){
+                	alert(response.message)
+                    window.location.reload()
+                    
+                   }  
+            }
+        });
+});
+
+</script>
+{% endblock %}

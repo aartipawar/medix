@@ -1,0 +1,1755 @@
+{% extends 'layout/dashboard_profile_layout.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+      <p {% if message.tags %} class="{{message.tags}}" {% endif %}>{{ message }}</p>
+  {% endfor %}
+  <script type="text/javascript">
+      setTimeout(function(){
+      $(".success").hide();
+      $(".error").hide();  
+      }, 5000);
+  </script>
+{% endif %}
+<main>
+        <div id="breadcrumb">
+            <div class="container">
+                
+            </div>
+        </div>
+        <!-- /breadcrumb -->
+
+        <div class="container margin_60">
+            <div class="row" style="transform: none;">
+                <div class="col-xl-8 col-lg-8">
+                    <nav id="secondary_nav">
+                        <div class="container">
+                            <ul class="clearfix">
+                                <li><a href="#section_1" class="active"></a></li>
+                                <li><a href="#section_2"></a></li>
+                                <li><a href="#sidebar"></a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div id="section_1">
+                        <div class="box_general_3">
+                            <div class="profile">
+                                <div class="row">
+                                   <div class="col-lg-5 col-md-4">
+                                        <!-- <figure>
+                                            <img src="../../../static/html_menu_1/img/images.jpeg" alt="" class="img-fluid">
+                                        </figure> -->
+                                  <div class="avatar-upload">
+                                     <div class="avatar-edit">
+
+                                  <div class="popup_main">
+                                    <button class="open_popup popup_imagewidth"><img src="../../../static/html_menu_1/img/edit.png"></button>
+                                    <div class="popup_body">
+                                      <div class="popup_back"></div>
+                                        <div class="popup_contain popup_width">
+                                        <div class="popuptitle">
+                                          Edit Profile Picture
+                                        <div class="popup_close popup_profile">&times;</div>
+                                        </div>
+                                        <div class="popupbody">
+                                        <form id="add-picture" method="POST" action="/upload/image/" enctype="multipart/form-data">{% csrf_token %}
+                                         
+                                          <input type='file' id="imageUpload" class="crop_upload" name="image">
+                                         <input type="hidden" name="institution" value="institution">
+                                          </div>
+                                          <div class="popupfooter">
+                                          <button type="submit" class="add-picture save_btncss">save</button> 
+                                          </div>
+                                          </form> 
+                                        </div>
+                                    </div>
+                                  </div>
+
+                                     </div>
+                                     <div class="avatar-preview">
+                                      {% if  image.image %}
+                                        
+                                        <img src="{{image.image.url}}">
+                                      {% else %}
+                                      <img src="{% static 'html_menu_1/img/institute.png' %}">
+                                      {% endif %}
+                                      <div id="imagePreview" style="background-image: url(../../../static/html_menu_1/img/female.jpg);">
+
+                                      </div>
+                                     </div>
+                                    </div>
+                                  </div>
+                                    <div class="col-lg-7 col-md-8" id="primary_care">
+                                        <small>{{institution}}
+                                            <div class="popup_main">
+                                            <button class="open_popup popup_imagewidth"><img src="{% static 'html_menu_1/img/edit.png' %}"></button>
+                                            <div class="popup_body">
+                                              <div class="popup_back"></div>
+                                                <div class="popup_contain popup_width">
+                                                    <div class="popuptitle">
+                                                    User Details
+                                                        <div class="popup_close popup_profile">
+                                                    &times;</div>
+                                                    </div>
+                                                <div class="popupbody">
+                                                    <div class="form-group">
+                                                       <lable class="labelfull">Trading Name
+                                                       </lable>
+                                                       <input type="text" name="trading_name" value="{{trading_name}}" class="form-control" id="tradName">
+                                                   </div>
+                                                    <div class="form-group">
+                                                    <lable class="labelfull">Email</lable> 
+                                                    <input type="text" class="form-control" name="email" value="{{email}}" id="email">
+                                                   </div>
+                                                    <div class="form-group">
+                                                    <lable class="labelfull">Address Of Institution</lable> 
+                                                    <input type="text" class="form-control" name="address_of_institution" value="{{address_of_institution}}" id="address">
+                                                   </div>
+                                                    <div class="form-group">
+                                                    <lable class="labelfull">Phone</lable> 
+                                                    <input type="text" name="phone" class="form-control" value="{{phone}}" id="phone">
+                                                   </div>
+                                                    <div class="form-group">
+                                                    <lable class="labelfull">Contact Person</lable> 
+                                                    <input type="text" name="contact_person" class="form-control" value="{{contact_person}}" id="contactp">
+                                                   </div>
+                                                </div>
+                                                <div class="popupfooter">
+                                                    <button data-id="{{request.user.profile.id}}" data-url="{% url 'users:edit-insurance-profile' %}" class="btnsave save_btn">save</button>
+                                                </div>  
+                                            </div>
+                                            </div>
+                                          </div>
+                                        </small>
+
+                                        <h1>{{trading_name}}</h1>
+                                        
+                                        <ul class="contacts">
+                                            <li>
+                                                <h6>Email</h6>
+                                                {{email}}
+                                                
+                                            </li>
+                                            <li>
+                                                <h6>Phone</h6> <a href="tel://{{phone}}">{{phone}}</a> 
+                                            </li>
+                                            <li>
+                                                <h6>Address Of Institution</h6> 
+                                                {{address_of_institution}}
+                                            </li>
+                                            <li>
+                                                <h6>Contact Person</h6> 
+                                                {{contact_person}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>  
+                            <hr>
+                            
+                            <!-- /profile -->
+                            <div class="indent_title_in">
+                                <i class="pe-7s-user"></i>
+                                <h3>Overview</h3>
+                                <div class="popup_main margin_topvalue">
+                                    <button class="open_popup editView"><img src="../../../static/html_menu_1/img/add_icon.png">
+                                    </button>
+                                    <div class="popup_body">
+                                              <div class="popup_back">
+                                              </div>
+                                                <div class="popup_contain popup_width">
+                                                    <div class="popuptitle">
+                                                        Overview
+                                                        <div class="popup_close popup_profile">&times;</div>
+                                                    </div>
+                                                  <div class="popupbody">
+                                                      <ul class="contacts">
+                                                    <h6>Description</h6>
+                                                    <textarea type="text" rows="5" cols="22" value="{{description}}" name="description" id="description">{{description}}
+                                                    </textarea>
+                                                   
+                                                    </ul>
+                                                    <ul class="contacts">
+                                                    <h6>Year Of Experience</h6>
+                                                    <input type="text" value="{{experience}}" name="experience" id="experience">
+                                                    </ul>
+                                                  </div>
+                                                   <div class="popupfooter">
+                                                       <button data-id="{{request.user.profile.id}}" data-url="{% url 'users:add-insurance-overview' %}" class="save_overview btnsave">save</button>
+                                                   </div>
+                                                    
+                                                </div>
+                                    </div>
+                                </div>    
+                            </div>
+                            <div class="wrapper_indent">
+                                <p id="pra_{{request.user.profile.id}}">
+                                    {% if description != None %}
+                                        {{description}}
+                                        <a data-id="{{request.user.profile.id}}" data-url="{% url 'users:delete-description' %}" class="delete_des popup_main">
+                                            <img src="../../../static/html_menu_1/img/delete.png">
+                                        </a>
+                                    {% endif %}
+                                </p>  
+                                <p id="exp_ptag">
+                                    {% if experience != None %}
+                                        Year Of Experience-{{experience}}
+                                        
+                                        <a data-id="{{request.user.profile.id}}" data-url="{% url 'users:delete-experience' %}" class="delete_exp popup_main">
+                                            <img src="../../../static/html_menu_1/img/delete.png">
+                                        </a>
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <!-- /wrapper indent -->
+
+                            <hr>
+
+                            <div class="indent_title_in">
+                                <i class="pe-7s-cash"></i>
+                                <h3>Items & Prices</h3>
+                                <div class="popup_main position_div margin_topvalue">
+                                    <button class="open_popup"><img src="../../../static/html_menu_1/img/add_icon.png">
+                                    </button>
+                                    <div class="popup_body">
+                                        <div class="popup_back"></div>
+                                            <div class="popup_contain popup_width">
+                                                <div class="popuptitle">
+                                                    Item & Prices
+                                                    <div class="popup_close popup_profile">&times;</div>
+                                                </div>
+                                                <div class="popupbody">
+                                                    <ul class="contacts">
+                                                    <h6>Item</h6>
+                                                    <input type="text" value="{{item}}" name="item" id="item">
+                                                </ul>
+                                                <ul class="contacts">
+                                                    <h6>Price</h6>
+                                                    <input type="text" value="{{price}}" name="price" id="price">
+                                                </ul>
+                                                <ul class="contacts">
+                                                    <h6>On Request</h6>
+                                                    <input type="checkbox" name="on_request" >
+                                                </ul>
+                                                </div>
+                                               <div class="popupfooter">
+                                                   <button data-id="{{request.user.profile.id}}" data-url="{% url 'users:add-product' %}" class="save_product btnsave">save</button>
+                                               </div>
+                                             
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="wrapper_indent">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Items</th>
+                                                <th>Price</th>
+                                                <th>On Request</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                            {% for product in products %}
+                                            <tr id="education_li_{{product.id}}">
+                                                <td>{{product.item}}</td>
+                                                <td>${{product.price}}</td>
+
+                                                <td>
+                                                {% if product.on_request == True %}
+                                                <input type="checkbox" name="on_request" value="{{product.on_request}}" class="disOnReq" checked>
+                                                {% else %}
+                                                <input type="checkbox" name="on_request" value="{{product.on_request}}" class="disOnReq">
+                                                {%endif%}
+                                                </td>
+                                                <td>
+                                                <div class="popup_main">
+                                                <button class="open_popup popup_imagewidth"><img src="../../../static/html_menu_1/img/edit.png"></button>
+                                                <a data-id="{{product.id}}" data-url="{% url 'users:product-delete' %}" class="delete_product">
+                                                    <img src="../../../static/html_menu_1/img/delete.png">
+                                                </a>
+                                                <div class="popup_body">
+                                                  <div class="popup_back"></div>
+                                                    <div class="popup_contain popup_width">
+                                                    <div class="popuptitle">
+                                                        Edit Item & Prices
+                                                        <div class="popup_close">&times;</div>
+                                                    </div>
+                                                    <div class="popupbody">
+                                                         <ul class="contacts">
+                                                        <h6>Item</h6>
+                                                        <input type="text" value="{{product.item}}" name="item" class="editItem">
+                                                        </ul>
+                                                        <ul class="contacts">
+                                                        <h6>Price</h6>
+                                                       <input type="text" value="{{product.price}}" name="price" class="editPrice">
+                                                    </ul>
+                                                    <ul class="contacts">
+                                                    <h6>On Request</h6>
+                                                    {% if product.on_request == True %}
+                                                    <input type="checkbox" name="on_req" value="{{product.on_request}}" checked>
+                                                    {% else %}
+                                                    <input type="checkbox" name="on_req" value="{{product.on_request}}" >
+                                                    {% endif %}
+                                                    </ul> 
+                                                    </div>
+                                                     <div class="popupfooter">
+                                                        <button data-id="{{product.id}}" data-url="{% url 'users:edit-product' %}" class="edit_pro btnsave">save</button>  
+                                                     </div>  
+                                                   
+                                                    </div>
+                                                </div>
+                                              </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}  
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--  /wrapper_indent -->
+                            <hr>
+                            
+                            <div class="indent_title_in">
+                                <i class="pe-7s-cash"></i>
+                                <h3>Ambulances</h3>
+                                <div class="popup_main margin_topvalue">
+                                    <button class="open_popup"><img src="../../../static/html_menu_1/img/add_icon.png"></button>
+                                    <div class="popup_body">
+                                      <div class="popup_back"></div>
+                                        <div class="popup_contain popup_width">
+                                            <div class="popuptitle">
+                                               Ambulances                    <div class="popup_close popup_profile">&times;</div>                   
+                                            </div>
+                                            <div class="popupbody">
+                                               <ul class="contacts">
+                                                    <li>
+                                                        <h6>Location</h6>
+                                                        {{ambulance.location}}  
+                                                    </li>
+                                                </ul>
+                                                <ul class="contacts">
+                                                    <li>
+                                                        <h6>Contact</h6>
+                                                        {{ambulance.contact}}
+                                                    </li>
+                                                </ul> 
+                                            </div>
+                                          
+                                        <div class="popupfooter">
+                                           <button data-id="{{request.user.profile.id}}" data-url="{% url 'users:add-ambulance-info' %}" class="save_ambulance btnsave">save</button> 
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                </div>    
+                            </div>
+                            
+                            <div class="wrapper_indent">
+                                
+                                <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Location</th>
+                                            <th>Contact</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for info in ambulanceInfo %}
+                                        <tr id="ambu_tr_{{info.id}}">
+                                            <td>{{info.location}}</td>
+                                            <td>{{info.contact}}</td>
+                                            <td>
+                                            <div class="popup_main">
+                                            <button class="open_popup popup_imagewidth"><img src="../../../static/html_menu_1/img/edit.png"></button>
+                                            <a data-id="{{info.id}}" data-url="{% url 'users:ambulance-info-delete' %}" class="delete_ambu">
+                                                <img src="../../../static/html_menu_1/img/delete.png">
+                                            </a>
+                                            <div class="popup_body">
+                                              <div class="popup_back"></div>
+                                                <div class="popup_contain popup_width">
+                                                <div class="popuptitle">
+                                                   Edit Ambulance Details                <div class="popup_close">&times;</div>                   
+                                                </div>
+                                                  <div class="popupbody">
+                                                    <ul class="contacts">
+                                                    <h6>Location</h6>
+                                                    <input type="text" value="{{info.location}}" name="location" class="editLocation">
+                                                    </ul>
+                                                    <ul class="contacts">
+                                                    <h6>Contact</h6>
+                                                   <input type="text" value="{{info.contact}}" name="contact" class="editContact">
+                                                    </ul>
+                                                  </div>
+                                                <div class="popupfooter">
+                                                  <button data-id="{{info.id}}" data-url="{% url 'users:edit-ambulance-info' %}" class="edit_ambuinfo btnsave">save</button>  
+                                                </div>
+                                                
+                                                </div>
+                                            </div>
+                                          </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %} 
+                                        
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="indent_title_in">
+                                <i class="pe-7s-map-marker"></i>
+                                <h3>Location & Trading Hours</h3>
+                                <div class="popup_main margin_topvalue">
+                                    <button class="open_popup"><img src="../../../static/html_menu_1/img/add_icon.png"></button>
+                                    <div class="popup_body">
+                                      <div class="popup_back"></div>
+                                        <div class="popup_contain popup_width">
+
+                                            <div class="popuptitle">
+                                                Location & Trading Hours
+                                                <div class="popup_close popup_profile">&times;</div>
+                                            </div>
+                                          <div class="popupbody">
+                                            <div class="popupscroll">
+                                            <ul class="contacts">
+                                            
+                                          <form method="POST" role="form" enctype="multipart/form-data" id="form-location"
+                                          action="{% url 'users:add-location' %}" >
+                                          {% csrf_token %}
+                                            <div class="row">
+                                              <div class="col-md-6">
+                                                <h6>Location</h6>
+                                                <input type="text" value="{{location}}" name="location" id="locationId">
+                                              </div>
+                                              <div class="col-md-6 checkbox_input">
+                                                        
+                                                <input type="checkbox" name="mobility">  Mobility
+                                                </div>
+                                              </div>
+                                            </ul>
+                                            <ul class="contacts open_time width_disablediv">
+                                            <li class="width_29">
+                                                
+                                              <input type="text" name="mon" value="Monday" id="mon" disabled>
+                                            </li>
+                                            <li class="width_10">
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="monTog" class="monIn">
+                                                <span  class="slider round"></span>
+                                              </label>
+                                            </li>
+                                            <li id="monOpn">Close</li>
+                                            <li class="width_29" id="monli">
+                                              {{tradHour.open_time|add_class:"mon_open_time"}}
+                                              {{tradHour.close_time|add_class:"mon_close_time" }}
+                                            </li>
+                                                                 
+                                            </ul>
+                                            <ul class="contacts open_time width_disablediv">
+                                            <li class="width_29">  
+                                              <input type="text" name="tue" value="Tuesday" id="tue" disabled>
+                                            </li>
+                                            <li class="width_10">
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="tueTog" class="tueIn">
+                                                <span class="slider round"></span>
+                                              </label>
+                                            </li>
+                                            <li id="tueOpn">Close</li>
+                                            <li class="width_29 cls_open_time" id="tueli">
+                                              {{tradHour.open_time|add_class:"tue_open_time"}}
+                                              {{tradHour.close_time|add_class:"tue_close_time"}}
+                                            </li>
+                                           
+                                            </ul>
+                                            <ul class="contacts open_time width_disablediv">
+                                            <li class="width_29">  
+                                              <input type="text" name="wed" value="Wednesday" id="wed" disabled>
+                                            </li>
+                                            <li class="width_10">
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="wedTog" class="wedIn">
+                                                <span class="slider round"></span>
+                                              </label>
+                                            </li>
+                                            <li id="wedOpn">Close</li>
+                                            <li class="width_29 cls_open_time" id="wedli">
+                                              {{tradHour.open_time|add_class:"wed_open_time"}}
+                                              {{tradHour.close_time|add_class:"wed_close_time"}}
+                                            </li>  
+                                            </ul>
+                                            <ul class="contacts open_time width_disablediv">
+                                            <li class="width_29">  
+                                              <input type="text" name="thus" value="Thursday" id="thus" disabled>
+                                            </li>
+                                            <li class="width_10">
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="thuTog" class="thuIn">
+                                                <span class="slider round"></span>
+                                              </label>
+                                            </li>
+                                            <li id="thuOpn">Close</li>
+                                            <li class="width_29 cls_open_time" id="thuli">
+                                              {{tradHour.open_time|add_class:"thu_open_time"}}
+                                              {{tradHour.close_time|add_class:"thu_close_time"}}
+                                            </li>
+                                            </ul>
+                                            <ul class="contacts open_time width_disablediv">
+                                            <li class="width_29">
+                                                
+                                              <input type="text" name="friday" value="Friday" id="friday" disabled>
+                                            </li>
+                                            <li class="width_10">
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="friTog" class="friIn">
+                                                <span class="slider round"></span>
+                                              </label>
+                                            </li>
+                                            <li id="friOpn">Close</li>
+                                            <li class="width_29 cls_open_time" id="frili">
+                                              {{tradHour.open_time|add_class:"fri_open_time"}}
+                                              {{tradHour.close_time|add_class:"fri_close_time"}}
+                                            </li>  
+                                            </ul>
+                                           <ul class="contacts open_time width_disablediv">
+                                            <li class="width_29">
+                                              <input type="text" name="sat" value="Saturday" id="sat" disabled>
+                                            </li>
+                                            <li class="width_10">
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="satTog" class="satIn">
+                                                <span class="slider round"></span>
+                                              </label>
+                                            </li>
+                                            <li id="satOpn">Close</li>
+                                            <li class="width_29 cls_open_time" id="satli">
+                                              {{tradHour.open_time|add_class:"sat_open_time"}}
+                                              {{tradHour.close_time|add_class:"sat_close_time"}}
+                                            </li>
+                                            
+                                            </ul>
+                                             <ul class="contacts open_time width_disablediv">
+                                            <li class="width_29">
+                                              <input type="text" name="sun" value="Sunday" id="sun" disabled>
+                                            </li>
+                                            <li class="width_10">
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="sunTog" class="sunIn">
+                                                <span class="slider round"></span>
+                                              </label>
+                                            </li>
+                                            <li id="sunOpn">Close</li>
+                                            <li class="width_29 cls_open_time" id="sunli">
+                                              {{tradHour.open_time|add_class:"sun_open_time"}}
+                                              {{tradHour.close_time|add_class:"sun_close_time"}}
+                                            </li>
+                                            
+                                            </ul>
+                                            </div>
+                                              
+                                          </div>
+                                           <input type="hidden" name="healthLoc" value="insurance">
+                                          <div class="popupfooter">
+                                            <button type="submit" data-id="{{request.user.profile.id}}" class="save_location btnsave">Add</button>
+
+                                          </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                  </div>
+                                
+                            </div>
+                            <div class="wrapper_indent padding_bottom">
+                                <p></p>
+                                
+                                <ul class="">
+                                    
+                                    {% for val in opratHour %}
+                                    <strong> 
+
+                                    {% ifchanged val.location.location %}
+                                        
+                                        {{val.location.location}}
+                                        {% if val.location.mobility == True %}
+                                        <input type="checkbox" name="mobility" value="{{val.location.mobility}}" class="homVist mobVist" checked>Mobility
+                                        {% else %}
+                                        <input type="checkbox" name="mobility" value="{{val.location.mobility}}" class="homVist mobVist">Mobility
+                                        {% endif %}
+                                      
+                                        <div class="popup_main">
+                                         
+                                            <a data-id="{{val.location.id}}" data-url="{% url 'users:delete-location' %}" class="delete_location popup_main" >
+                                            <img src="../../../static/html_menu_1/img/delete.png">
+                                            </a>
+                                            <button class="open_popup float_right edit_location" data-id="{{val.location.id}}" data-url="{% url 'users:edit-location' %}"><img src="../../../static/html_menu_1/img/edit.png"></button>
+                                            
+                                            <div class="popup_body">
+                                              <div class="popup_back"></div>
+                                                <div class="popup_contain popup_width">
+                                                <div class="popuptitle">
+                                                    Edit Location & Trading Hours
+                                                    <div class="popup_close">&times;</div>
+                                                </div>
+                                                <div class="popupbody">
+                                                    <div class="popupscroll">
+                                                    <div class="row">
+                                                <div class="col-md-6">
+                                                <h6>Location</h6>
+                                                <input type="text" value="" name="locationAdd" class="locId">
+                                                </div>
+                                              <div class="col-md-6 checkbox_input">
+                                                {% if val.location.mobility == True %}
+                                                <input type="checkbox" name="hom_visit" value="" class="homVist" checked>Mobility
+                                                {% else %}
+                                                <input type="checkbox" name="hom_visit" value="" class="homVist">Mobility
+                                                {% endif %} 
+                                              </div>
+                                             </div>       
+                                            <ul class="contacts open_time">
+                                            <li class="width_29">
+                                                <h6>Day</h6>
+                                                <input type="text" name="mon" value="mon" id="mondy" disabled>
+                                            </li>
+                                            <li class="width_29">
+                                                <h6>Opening Time</h6>
+                                                <input type="text" name="myMonOpn" value="" class="myMonOpn" >
+                                            </li>
+                                            <li class="width_29">
+                                                <h6>Closing Time</h6>
+                                                <input type="text" name="myMonCls" value="" class="myMonCls" >
+                                            </li>
+                                            <li class="width_10">
+                                              
+                                             
+                                              {% for val in opratHour %}
+                                              
+                                              {% if forloop.counter == 1 %}
+                                          
+                                              {% if val.status == True  %}
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="myMonTog" class="myMonTog" value="" checked>
+                                                <span  class="slider round"></span>
+                                              </label>
+                                              {% else %}
+                                              <label class=class="switch switch_label">
+                                                <input type="checkbox" name="myMonTog" class="myMonTog" value="">
+                                                <span  class="slider round"></span>
+                                              </label>
+                                              {% endif %}
+                                              {% endif %}
+                                              
+                                            {% endfor %}
+                                            </li>
+                                            </ul>
+                                            <ul class="contacts open_time">
+                                            <li class="width_29">
+                                                <h6>Day</h6>
+                                                <input type="text" name="tue" value="tue" id="tuedy" disabled>
+                                            </li>
+                                            <li class="width_29">
+                                                <h6>Opening Time</h6>
+                                                <input type="text" name="myTueOpn" value="" class="myTueOpn" >
+                                            </li>
+                                            <li class="width_29">
+                                                <h6>Closing Time</h6>
+                                                <input type="text" name="myTueCls" value="" class="myTueCls" >
+                                            </li>
+                                            <li class="width_10">
+                                            {% for val in opratHour %}
+                                            
+                                            {% if forloop.counter == 2 %}
+                                            
+                                            {% if val.status == True %}
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="myTueTog" class="myTueTog" value="" checked>
+                                                <span  class="slider round"></span>
+                                              </label>
+                                            {% else %}
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="myTueTog" class="myTueTog" value="">
+                                                <span class="slider round"></span>
+                                              </label>
+                                            {% endif %}
+                                            {% endif %}
+                                            
+                                            {% endfor %}
+                                            </li>
+                                            </ul>
+                                            <ul class="contacts open_time">
+                                            <li class="width_29">
+                                                <h6>Day</h6>
+                                                <input type="text" name="wed" value="wed" id="wedy" disabled>
+                                            </li>
+                                            <li class="width_29" >
+                                                <h6>Opening Time</h6>
+                                                <input type="text" name="myWedOpn" value="" class="myWedOpn" >
+                                            </li>
+                                            <li class="width_29">
+                                                <h6>Closing Time</h6>
+                                                <input type="text" name="myWedCls" value="{{close_time}}" class="myWedCls" >
+                                            </li>
+                                            <li class="width_10">
+                                              {% for val in opratHour %}
+
+                                              {% if forloop.counter == 3 %}
+                                              
+                                              {% if val.status == True %}
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="myWedTog" class="myWedTog" value="" checked>
+                                                <span  class="slider round"></span>
+                                              </label>
+                                              {% else %}
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="myWedTog" class="myWedTog" value="">
+                                                <span  class="slider round"></span>
+                                              </label>
+                                              {% endif %}
+                                              {% endif %}
+                                              {% endfor %}
+                                            </li>
+                                            </ul>
+                                            <ul class="contacts open_time">
+                                            <li class="width_29">
+                                                <h6>Day</h6>
+                                                <input type="text" name="thus" value="thu" id="thusdy" disabled>
+                                            </li>
+                                            <li class="width_29">
+                                                <h6>Opening Time</h6>
+                                                <input type="text" name="myThuOpn" value="{{open_time}}" class="myThuOpn" >
+                                            </li>
+                                            <li class="width_29">
+                                                <h6>Closing Time</h6>
+                                                <input type="text" name="myThuCls" value="{{close_time}}" class="myThuCls" >
+                                            </li>
+                                            <li class="width_10">
+                                              {% for val in opratHour %}
+                                              {% if forloop.counter == 4 %}
+                                              
+                                              {% if val.status == True %}
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="myThuTog" class="myThuTog" value="" chekced>
+                                                <span  class="slider round"></span>
+                                              </label>
+                                              {% else %}
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="myThuTog" class="myThuTog" value="">
+                                                <span  class="slider round"></span>
+                                              </label>
+                                              {% endif %}
+                                              {% endif %}
+                                              {% endfor %}
+                                            </li>
+                                            </ul>
+                                            <ul class="contacts open_time">
+                                            <li class="width_29">
+                                                <h6>Day</h6>
+                                                <input type="text" name="friday" value="fri" id="frdy" disabled>
+                                            </li>
+                                            <li class="width_29">
+                                                <h6>Opening Time</h6>
+                                                <input type="text" name="myFriOpn" value="{{open_time}}" class="myFriOpn" >
+                                            </li>
+                                            <li class="width_29">
+                                                <h6>Closing Time</h6>
+                                                <input type="text" name="myFriCls" value="{{close_time}}" class="myFriCls" >
+                                            </li>
+                                            <li class="width_10">
+
+                                              {% for val in opratHour %}
+                                              {% if forloop.counter == 5 %}
+                                              
+                                              {% if val.status == True %}
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="myFriTog" class="myFriTog" value="True" checked>
+                                                <span  class="slider round"></span>
+                                              </label>
+                                              {% else %}
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="myFriTog" class="myFriTog" value="">
+                                                <span  class="slider round"></span>
+                                              {% endif %}
+                                              {% endif %}
+                                              {% endfor %}
+                                            </li>
+                                           
+                                            </ul>
+                                           <ul class="contacts open_time">
+                                            <li class="width_29">
+                                                <h6>Day</h6>
+                                                <input type="text" name="sat" value="sat" id="satdy" disabled>
+                                            </li>
+                                            <li class="width_29">
+                                                <h6>Opening Time</h6>
+                                                <input type="text" name="mySatOpn" value="" class="mySatOpn" >
+                                            </li>
+                                            <li class="width_29">
+                                                <h6>Closing Time</h6>
+                                                <input type="text" name="mySatCls" value="" class="mySatCls" >
+                                            </li>
+                                            <li class="width_10">
+                                              {% for val in opratHour %}
+                                              {% if forloop.counter == 6 %}
+                                              <p>{{val.location.location}}</p>
+                                              {% if val.status == True %}
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="mySatTog" class="mySatTog" value="" checked="true">
+                                                <span  class="slider round"></span>
+                                              </label>
+                                              {% else %}
+                                              <label class="switch switch_label">
+                                                <input type="checkbox" name="mySatTog" class="mySatTog" value="">
+                                                <span  class="slider round"></span>
+                                              </label>
+                                              {% endif %}
+                                              {% endif %}
+                                              {% endfor %}
+                                            </li>
+                                            </ul>
+                                            </div>
+                                            <div class="popupfooter">
+                                              <button type="submit" class="edit_hours save_btncss" data-id="{{val.location.id}}" data-url="{% url 'users:edit-location-hour' %}">save</button>
+                                            </div>
+                                            </div>
+                                              </div> 
+                                            </div>
+                                          </div>
+                                    {% endifchanged %}    
+                                    </strong> 
+                                    
+                                    <li id="location_li_{{val.location.id}}">
+                                        {% if val.open_time != None and val.get_close_time_display != '00:00 AM' and val.status == True %}
+                                          {{val.day}}-{{val.get_open_time_display}}-{{val.get_close_time_display}}
+
+                                        {% elif val.get_close_time_display == '00:00 AM' and val.status == True %}
+                                        {{val.day}}-{{val.get_open_time_display}}
+                                        {% else %}
+                                          {{val.day}}-Closed
+                                        {%endif%} 
+                             
+                                    </li>
+                                    
+                                    {% endfor %} 
+                                      
+                                    </ul>
+
+                                </div>   
+                            <hr>
+                            <div class="indent_title_in">
+                                <i class="pe-7s-news-paper"></i>
+                                <h3>Services</h3>
+                                <div class="popup_main margin_topvalue">
+                                    <button class="open_popup"><img src="../../../static/html_menu_1/img/add_icon.png"></button>
+                                    <div class="popup_body">
+                                      <div class="popup_back"></div>
+                                        <div class="popup_contain popup_width">
+                                            <div class="popuptitle">
+                                                Services
+                                                <div class="popup_close popup_profile">&times;</div>
+                                            </div>
+                                            <div class="popupbody">
+                                                <ul class="contacts">
+                                                <h6>Services</h6>
+                                                <input type="text" value="" name="keyword" id="keyword">
+                                                </ul> 
+                                            </div>
+                                            <div class="popuptitle">
+                                               <button data-id="{{request.user.profile.id}}" data-url="{% url 'users:add-keyword' %}" class="save_keyword save_btncss">save</button> 
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="wrapper_indent">
+                                <p></p>
+                                
+                                <ul class="" id="delekeyul">
+                            
+                                    {% for key in keyword %}
+                                    
+                                    <li class="popup_spanlist"><span id="rmoveChip"> {{key.keyword}} <a data-id="{{key.id}}" data-url="{% url 'users:delete-keyword' %}" class="delete_keyword chipsCLose" >×</a></span></li>
+                                
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <hr>
+
+                            <div class="indent_title_in">
+                                <i class="pe-7s-news-paper"></i>
+                                <h3>Facilities</h3>
+                                <div class="popup_main margin_topvalue">
+                                    <button class="open_popup"><img src="../../../static/html_menu_1/img/add_icon.png"></button>
+                                    <div class="popup_body">
+                                      <div class="popup_back"></div>
+                                        <div class="popup_contain popup_width">
+                                            <div class="popuptitle">
+                                               Facilities
+                                               <div class="popup_close popup_profile">&times;</div> 
+                                            </div>
+                                            <div class="popupbody">
+                                              <ul class="contacts">
+                                                <h6>Facilities</h6>
+                                                <form action="/action_page.php" class="specialisation_form">
+                                              <input type="checkbox" name="vehicle1" value="Bike">Faciliti 1<br>
+                                              <input type="checkbox" name="vehicle2" value="Car">Faciliti 2<br>
+                                              <input type="checkbox" name="vehicle3" value="Boat" checked> Faciliti 3<br><br>
+                                              
+                                            </form>
+                                            </ul>  
+                                            </div>
+                                           
+                                            
+                                        </div>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="wrapper_indent padding_bottom">
+                                
+                            </div>
+
+                            <hr>
+
+                            <div class="indent_title_in">
+                                <i class="pe-7s-news-paper"></i>
+                                <h3>Areas Of Specialisation</h3>
+                                <div class="popup_main margin_topvalue">
+                                    <button class="open_popup"><img src="../../../static/html_menu_1/img/add_icon.png"></button>
+                                    <div class="popup_body">
+                                      <div class="popup_back"></div>
+                                        <div class="popup_contain popup_width">
+                                        <div class="popuptitle">
+                                           Areas Of Specialisation
+                                           <div class="popup_close popup_profile">&times;</div> 
+                                        </div>
+                                          <div class="popupbody">
+                                              <ul class="contacts">
+                                                <h6>Specialisation</h6>
+                                                    <form action="/action_page.php" class="specialisation_form">
+                                                  <input type="checkbox" name="vehicle1" value="Bike">Specialisation 1<br>
+                                                  <input type="checkbox" name="vehicle2" value="Car">Specialisation 2<br>
+                                                  <input type="checkbox" name="vehicle3" value="Boat" checked> Specialisation 3<br><br>
+                                                  
+                                                </form>
+                                            
+                                          </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrapper_indent padding_bottom">
+                                
+                            </div>
+                            <hr>
+
+                            <div class="indent_title_in doctor_div">
+
+                                <div class="popup_main">
+                                    <a class="open_popup doctor_list">View Doctors List</a>
+                                    
+                                    <div class="popup_body">
+                                      <div class="popup_back"></div>
+                                        <div class="popup_contain popup_width">
+                                        <div class="popuptitle">
+                                            Doctor's List
+                                            <div class="popup_close">&times;</div>
+                                        </div>
+                                        <div class="popupbody">
+                                            <div class="popupscroll">
+                                        {% for list in doctorList %}
+                                        <div class="popupdrlist">
+                                            {% if  list.service_member.profile.image %}
+                                            <img src="{{list.service_member.profile.image.url}}">
+                                            {% elif list.service_member.profile.gender == 1 %}
+                                        <img src="{% static 'html_menu_1/img/female_image.jpeg' %}">
+                                      {% else %}
+                                        <img src="{% static 'html_menu_1/img/male_image.jpeg' %}">
+                                      {% endif %}
+                                          <div class="detailbox">
+                                              <h1>{{list.service_member.first_name}}&nbsp;{{list.service_member.last_name}}
+                                                  
+                                                  {% if list.is_accept == 0 %}
+                                                  <span class="badge badge-info">Pending</span>
+                                                  {% elif list.is_accept == 2 %}
+                                                  <span class="badge badge-warning badge-val">Rejected</span>
+                                                  {% else %}
+                                                  <span class="badge badge-success badge-val">Accepted</span>
+                                                  {% endif %}
+                                                  
+                                              </h1>
+                                          
+                                              <h3>{{list.service_member.profile.get_practice_display}}</h3>
+                                              
+                                          </div>
+                                                    
+                                                    <li class="linkid listcircle" id="accli">
+                                                    <input type="hidden" name="service_id" id="service_id" value="{{list.id}}">
+                                                    <button class="btn btn-success approve">Accept</button>
+                                                    </li>
+                                                    
+                                                    <li class="linkid1 listcircle" id="rejli">
+                                                    <input type="hidden" name="service_reject" id="service_reject" value="{{list.id}}">
+                                                    <button class="btn btn-warning reject">Reject</button>
+                                                    </li>
+                                                    
+                                                    
+                                                </div> 
+                                                {% endfor %}
+                                            </div>
+                                        </div>       
+                                    </div>
+                                  </div>
+                                 
+                            </div>
+                            <div class="wrapper_indent">     
+                            </div>
+                        </div>
+                        <!-- /section_1 -->
+                    </div>
+                   
+                </div>
+               
+                <div class="clearfix"></div>
+                <!--box_general -->
+                
+                    <!-- /section_2 -->
+            </div>
+
+           
+            </div>
+            <!-- /row -->
+
+        </div>
+        <!-- /container -->
+</main>
+
+<!-- /main -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(".open_popup").click(function () {
+   $(this).parent(".popup_main").children(".popup_body").addClass("popup_body_show");
+   });
+ $(".popup_close").click(function () {
+   $(".popup_body").removeClass("popup_body_show");
+   });
+ $(".popup_back").click(function () {
+   $(".popup_body").removeClass("popup_body_show");
+   });
+
+$(".save_location").click(function(e){
+  locationVal = $("#locationId").val();
+  if (locationVal == ""){
+    alert("Please Fill Location")
+    e.preventDefault();
+   // $( ".blnkLoc" ).append( "<p>Please Fill Location</p>" );
+  }
+  
+});
+
+$('input[type="file"]').change(function () {
+  var ext = this.value.match(/\.(.+)$/)[1];
+  switch (ext) {
+  case 'jpg':
+  case 'jpeg':
+  case 'png':
+  $('#uploadButton').attr('disabled', false);
+  break;
+  default:
+  alert('Please select jpg or jpeg or png file');
+  this.value = '';
+  }
+});
+
+
+$("#monli").hide(); 
+$("#tueli").hide();
+$("#wedli").hide();
+$("#thuli").hide();
+$("#frili").hide();
+$("#satli").hide();
+$("#sunli").hide();
+
+$(function() {
+  $('select option:first-child').attr("selected", "selected");
+});
+
+$(".mon_open_time").click(function(){
+  valshow = $(this).val();
+  if ((valshow == 0) && (valshow != "")){
+    $(".mon_close_time").hide();  
+  }
+  else{
+    $(".mon_close_time").show(); 
+  }
+});
+
+$(".tue_open_time").click(function(){
+  valshow = $(this).val();
+  if ((valshow == 0) && (valshow != "")){
+    $(".tue_close_time").hide();  
+  }
+  else{
+    $(".tue_close_time").show(); 
+  }
+});
+
+$(".wed_open_time").click(function(){
+  valshow = $(this).val();
+  if ((valshow == 0) && (valshow != "")){
+    $(".wed_close_time").hide();  
+  }
+  else{
+    $(".wed_close_time").show(); 
+  }
+});
+
+$(".thu_open_time").click(function(){
+  valshow = $(this).val();
+  if ((valshow == 0) && (valshow != "")){
+    $(".thu_close_time").hide();  
+  }
+  else{
+    $(".thu_close_time").show(); 
+  }
+});
+
+$(".fir_open_time").click(function(){
+  valshow = $(this).val();
+  if ((valshow == 0) && (valshow != "")){
+    $(".fir_close_time").hide();  
+  }
+  else{
+    $(".fir_close_time").show(); 
+  }
+});
+
+$(".sat_open_time").click(function(){
+  valshow = $(this).val();
+  if ((valshow == 0) && (valshow != "")){
+    $(".sat_close_time").hide();  
+  }
+  else{
+    $(".sat_close_time").show(); 
+  }
+});
+
+$(".sun_open_time").click(function(){
+  valshow = $(this).val();
+  if ((valshow == 0) && (valshow != "")){
+    $(".sun_close_time").hide();  
+  }
+  else{
+    $(".sun_close_time").show(); 
+  }
+});
+
+$(".monIn").click(function(){
+  monTog = $('input[name="monTog"]').prop('checked');
+  if (monTog==true) {
+    $("#monli").show();
+    $("#monOpn").text("Open");   
+    }
+  if (monTog==false) {
+    $("#monli").hide();
+    $("#monOpn").text("Close");    
+  }
+ 
+});
+
+$(".tueIn").click(function(){
+  tueTog = $('input[name="tueTog"]').prop('checked');      
+  if (tueTog==true) {
+    $("#tueli").show();
+    $("#tueOpn").text("Open");    
+  }
+  if (tueTog==false){
+    $("#tueli").hide();
+    $("#tueOpn").text("Close");     
+  }
+});
+
+$(".wedIn").click(function(){
+  wedTog = $('input[name="wedTog"]').prop('checked');
+  if (wedTog==true) {
+    $("#wedli").show();
+    $("#wedOpn").text("Open");    
+  }
+  if (wedTog==false){
+    $("#wedli").hide();
+    $("#wedOpn").text("Close");    
+  }
+});
+
+$(".thuIn").click(function(){
+  thuTog = $('input[name="thuTog"]').prop('checked');
+  if (thuTog==true) {
+    $("#thuli").show();
+    $("#thuOpn").text("Open");    
+  }
+  if (thuTog==false) {
+    $("#thuli").hide();
+    $("#thuOpn").text("Close");    
+  }
+});
+
+$(".friIn").click(function(){
+  friTog = $('input[name="friTog"]').prop('checked');
+  if (friTog==true) {
+    $("#frili").show();
+    $("#friOpn").text("Open");    
+  }
+  if (friTog==false) {
+    $("#frili").hide();
+    $("#friOpn").text("Close");    
+  }
+});
+
+$(".satIn").click(function(){ 
+  satTog = $('input[name="satTog"]').prop('checked');   
+    if (satTog==true) {
+      $("#satli").show();
+      $("#satOpn").text("Open");    
+    }
+    if (satTog==false) {
+      $("#satli").hide();
+      $("#satOpn").text("Close");    
+    }  
+});   
+
+$(".sunIn").click(function(){ 
+  sunTog = $('input[name="sunTog"]').prop('checked');   
+    if (sunTog==true) {
+      $("#sunli").show();
+      $("#sunOpn").text("Open");    
+    }
+    if (sunTog==false) {
+      $("#sunli").hide();
+      $("#sunOpn").text("Close");    
+    }  
+});
+
+var badge_val = $(".badge-val").text()
+if (badge_val === "Accepted") {
+  $("#accli").hide();  
+} else if (badge_val === "Rejected") {
+  $("#rejli").hide();
+}
+
+
+$(document).on("click", ".approve", function(e){
+    e.preventDefault();
+    service_id = $(this).parents(".linkid").find("#service_id").val();
+    active_deactive_user(service_id,"acccept");
+})
+
+$(document).on("click", ".reject", function(e){
+    e.preventDefault();
+    service_id = $(this).parents(".linkid1").find("#service_reject").val();
+    active_deactive_user(service_id,"reject");
+});
+
+
+$(document).on("click", ".save_btn", function(e){
+    e.preventDefault();
+    url = $(this).data('url');
+    profile_id = $(this).data('id');
+    phone = $("#phone").val();
+    contactp = $("#contactp").val();
+    address = $("#address").val();
+    email = $("#email").val();
+    trad_name = $("#tradName").val();
+    $.ajax({
+        type: "POST",
+        url: url,
+        headers:{
+            "X-CSRFToken": '{{csrf_token}}' 
+        },
+        dataType: "json",
+        data: {"profile_id":profile_id,"phone":phone,"contactp":contactp, "email":email, "address":address,"trad_name":trad_name},
+        success: function(response) {
+            if(response.status == 200){
+                window.location.reload()
+               }  
+            }
+        });
+});
+
+
+$(document).on("click", ".save_overview", function(e){
+    e.preventDefault();
+    url = $(this).data('url');
+    profile_id = $(this).data('id');
+    description = $("#description").val();
+    experience = $('#experience').val();
+    $.ajax({
+        type: "POST",
+        url: url,
+        headers:{
+            "X-CSRFToken": '{{csrf_token}}' 
+        },
+        dataType: "json",
+        data: {"profile_id":profile_id,"description":description,"experience":experience},
+        success: function(response) {
+
+                if(response.status == 200){
+                    window.location.reload()
+                   }  
+            }
+        });
+});
+
+
+$(document).on("click", ".save_product", function(e){
+    e.preventDefault();
+    url = $(this).data('url');
+    profile_id = $(this).data('id');
+    price = $("#price").val();
+    item = $("#item").val();
+    onRequest=$('input[name="on_request"]').prop('checked');
+    $.ajax({
+        type: "POST",
+        url: url,
+        headers:{
+            "X-CSRFToken": '{{csrf_token}}' 
+        },
+        dataType: "json",
+        data: {"profile_id":profile_id,"price":price,"item":item,"onRequest":onRequest},
+        success: function(response) {
+                if(response.status == 200){
+                    window.location.reload()
+                   }  
+            }
+        });
+});
+
+
+
+$(document).on("click", ".save_ambulance", function(e){
+    e.preventDefault();
+    url = $(this).data('url');
+    profile_id = $(this).data('id');
+    locId = $("#id_location").val();
+    contact = $("#id_contact").val();
+    $.ajax({
+        type: "POST",
+        url: url,
+        headers:{
+            "X-CSRFToken": '{{csrf_token}}' 
+        },
+        dataType: "json",
+        data: {"profile_id":profile_id,"location":locId,"contact":contact},
+        success: function(response) {
+                if(response.status == 200){
+                    window.location.reload()
+                   }  
+            }
+        });
+});
+
+
+$(document).on("click", ".edit_btn", function(e){
+    e.preventDefault();
+    url = $(this).data('url');
+    edu_id = $(this).data('id');
+    quali = $(this).parents('.popup_contain').find(".mycloseclass").val();
+    $.ajax({
+        type: "POST",
+        url: url,
+        headers:{
+            "X-CSRFToken": '{{csrf_token}}' 
+        },
+        dataType: "json",
+        data: {"edu_id":edu_id,"qualification":quali},
+        success: function(response) {
+                if(response.status == 200){
+                    window.location.reload()
+                   }
+                else{
+                  alert(response.message);
+                }   
+            }
+        });
+});
+
+$(document).on("click", ".edit_pro", function(e){
+    e.preventDefault();
+    url = $(this).data('url');
+    product_id = $(this).data('id');
+    
+    item = $(this).parents('.popup_contain').find(".editItem").val();
+    price = $(this).parents('.popup_contain').find(".editPrice").val();
+    onRequest=$('input[name="on_req"]').prop('checked');
+    $.ajax({
+        type: "POST",
+        url: url,
+        headers:{
+            "X-CSRFToken": '{{csrf_token}}' 
+        },
+        dataType: "json",
+        data: {"product_id":product_id,"item":item,"price":price,"onRequest":onRequest},
+        success: function(response) {
+                if(response.status == 200){
+                    window.location.reload()
+                   }  
+            }
+        });
+});
+
+$('.disOnReq').attr('disabled',true);
+
+$(document).on("click", ".save_keyword", function(e){
+    e.preventDefault();
+    url = $(this).data('url');
+    profile_id = $(this).data('id');
+    keyword = $("#keyword").val();
+    $.ajax({
+        type: "POST",
+        url: url,
+        headers:{
+            "X-CSRFToken": '{{csrf_token}}' 
+        },
+        dataType: "json",
+        data: {"profile_id":profile_id,"keyword":keyword},
+        success: function(response) {
+                if(response.status == 200){
+                    window.location.reload()
+                   }
+                else{
+                  alert(response.message);
+                  $(".save_keyword").removeAttr('disabled');
+                }  
+            }
+        });
+    $(".save_keyword").attr('disabled','disabled');
+});
+
+$(document).on("click", ".delete_quali", function(e){
+    e.preventDefault();
+    if (confirm("Are you sure you want to delete this qualification!")) {
+    url = $(this).data('url');
+    education_id = $(this).data('id');
+    var li = ("#education_li_" + education_id);
+    $.get(url, {'education_id':education_id}, function(response){
+        if(response.status==200){
+        $(li).remove();
+        $( ".successdelet" ).html( "<p>Education deleted successfully!</p>" );
+        $(".successdelet").css("display","block");
+        setTimeout(function(){
+        $(".successdelet").hide(); 
+        }, 5000);
+        }
+    });
+    } // confirm box end
+});
+
+$(document).on("click", ".delete_product", function(e){
+    e.preventDefault();
+    if (confirm("Are you sure you want to delete this product!")) {
+    url = $(this).data('url');
+    product_id = $(this).data('id');
+    var li = ("#product_tr_" + product_id);
+    $.get(url, {'product_id':product_id}, function(response){
+        if(response.status==200){
+        $(li).remove();
+        $( ".successdelet" ).html( "<p>Product deleted successfully!</p>" );
+        $(".successdelet").css("display","block");
+        setTimeout(function(){
+        $(".successdelet").hide(); 
+        }, 5000);
+        }
+    });
+    } // confirm box end
+});
+
+$(document).on("click", ".delete_keyword", function(e){
+    e.preventDefault();
+    if (confirm("Are you sure you want to delete this keyword!")) {
+    url = $(this).data('url');
+    key_id = $(this).data('id');
+    $.get(url, {'keyword_id':key_id}, function(response){
+        if(response.status==200){
+       
+        window.location.reload()
+        $( ".successdelet" ).html( "<p>Keyword deleted successfully!</p>" );
+        $(".successdelet").css("display","block");
+        setTimeout(function(){
+        $(".successdelet").hide(); 
+        }, 5000);
+        }
+    });
+    } // confirm box end
+});
+
+$(document).on("click", ".delete_des", function(e){
+    e.preventDefault();
+    if (confirm("Are you sure you want to delete this description!")) {
+    url = $(this).data('url');
+    profile_id = $(this).data('id');
+    var pra = ("#pra_"+profile_id)
+    $.get(url, {'profile_id':profile_id}, function(response){
+        if(response.status==200){
+        $(pra).remove();
+        window.location.reload()
+        $( ".successdelet" ).html( "<p>Description deleted successfully!</p>" );
+        $(".successdelet").css("display","block");
+        setTimeout(function(){
+        $(".successdelet").hide(); 
+        }, 5000);
+        }
+    });
+    } // confirm box end
+});
+
+$(document).on("click", ".delete_exp", function(e){
+    e.preventDefault();
+    if (confirm("Are you sure you want to delete this experience!")) {
+    url = $(this).data('url');
+    profile_id = $(this).data('id');
+    $.get(url, {'profile_id':profile_id}, function(response){
+        if(response.status==200){
+        $("#exp_ptag").remove();
+        window.location.reload()
+        $( ".successdelet" ).html( "<p>Experience deleted successfully!</p>" );
+        $(".successdelet").css("display","block");
+        setTimeout(function(){
+        $(".successdelet").hide(); 
+        }, 5000);
+        }
+    });
+    } // confirm box end
+});
+
+$(document).on("click", ".delete_ambu", function(e){
+    e.preventDefault();
+    if (confirm("Are you sure you want to delete this experience!")) {
+    url = $(this).data('url');
+    ambulance_id = $(this).data('id');
+    var li = ("#ambu_tr_" + ambulance_id);
+    $.get(url, {'ambulance_id':ambulance_id}, function(response){
+        if(response.status==200){
+        $(li).remove();
+        $( ".successdelet" ).html( "<p>Experience deleted successfully!</p>" );
+        $(".successdelet").css("display","block");
+        setTimeout(function(){
+        $(".successdelet").hide(); 
+        }, 5000);
+        }
+    });
+    } // confirm box end
+});
+
+$(document).on("click", ".edit_ambuinfo", function(e){
+    e.preventDefault();
+    url = $(this).data('url');
+    ambulance_id = $(this).data('id');
+    locationInfo = $(this).parents('.popup_contain').find(".editLocation").val();
+    contact = $(this).parents('.popup_contain').find(".editContact").val();
+    $.ajax({
+        type: "POST",
+        url: url,
+        headers:{
+            "X-CSRFToken": '{{csrf_token}}' 
+        },
+        dataType: "json",
+        data: {"ambulance_id":ambulance_id,"locationInfo":locationInfo,"contact":contact},
+        success: function(response) {
+                if(response.status == 200){
+                    window.location.reload()
+                   }  
+            }
+        });
+});
+
+$(document).on("click", ".delete_location", function(e){
+    e.preventDefault();
+    if (confirm("Are you sure you want to delete this location!")) {
+    url = $(this).data('url');
+    location_id = $(this).data('id');
+    var li = ("#location_li_" + location_id);
+    $.get(url, {'location_id':location_id}, function(response){
+        if(response.status==200){
+        $(li).remove();
+        window.location.reload()
+        $( ".successdelet" ).html( "<p>Location deleted successfully!</p>" );
+        $(".successdelet").css("display","block");
+        setTimeout(function(){
+        $(".successdelet").hide(); 
+        }, 5000);
+        }
+    });
+    } // confirm box end
+});
+
+
+
+$(document).on("click", ".edit_location", function(e){
+    e.preventDefault();
+    url = $(this).data('url');
+    location_id = $(this).data('id');
+
+    locationVal = $("#locationId").val();
+    $.ajax({
+        type: "POST",
+        url: url,
+        headers:{
+            "X-CSRFToken": '{{csrf_token}}' 
+        },
+        dataType: "json",
+        data: {
+            "location_id" : location_id,
+            "locations" : locationVal,
+        },
+        success: function(res) {
+            
+                if(res.status == 200){
+                   var hour_list = res.loc_hour_list;
+                   
+                   for (var i = 0; i < hour_list.length; i++) {
+                        $(".locId").val(hour_list[i].location)
+                        $(".hom_visit").val(hour_list[i].mobility)
+                        
+                        if(hour_list[i].day == 'mon'){
+                          $(".myMonOpn").val(hour_list[i].open_time)
+                          $(".myMonCls").val(hour_list[i].close_time)
+                          $(".myMonTog").val(hour_list[i].status)
+                        }
+                        if(hour_list[i].day == 'tue'){
+                          $(".myTueOpn").val(hour_list[i].open_time)
+                          $(".myTueCls").val(hour_list[i].close_time)
+                          $(".myTueTog").val(hour_list[i].status)  
+                        }
+                        if(hour_list[i].day == 'wed'){
+                          $(".myWedOpn").val(hour_list[i].open_time)
+                          $(".myWedCls").val(hour_list[i].close_time)
+                          $(".myWedTog").val(hour_list[i].status)  
+                        }
+                        if(hour_list[i].day == 'thu'){
+                          $(".myThuOpn").val(hour_list[i].open_time)
+                          $(".myThuCls").val(hour_list[i].close_time)
+                          $(".myThuTog").val(hour_list[i].status)   
+                        }
+                        if(hour_list[i].day == 'fri'){
+                          $(".myFriOpn").val(hour_list[i].open_time)
+                          $(".myFriCls").val(hour_list[i].close_time)
+                          $(".myFriTog").val(hour_list[i].status)
+                        }
+                        if(hour_list[i].day == 'sat'){
+                          $(".mySatOpn").val(hour_list[i].open_time)
+                          $(".mySatCls").val(hour_list[i].close_time)
+                          $(".mySatTog").val(hour_list[i].status)   
+                        }
+                   }
+                   }
+                   else if (response.status == 400){
+                    window.location.reload() 
+                   }     
+                }
+
+            });
+        });
+
+$(document).on("click", ".edit_hours", function(e){
+    e.preventDefault();
+    url = $(this).data('url');
+    location_id = $(this).data('id');
+    monOpn = $(".myMonOpn").val();
+    monCls = $(".myMonCls").val();
+    tueOpn = $(".myTueOpn").val();
+    tueCls = $(".myTueCls").val();
+    wedOpn = $(".myWedOpn").val();
+    wedCls = $(".myWedCls").val();
+    thuOpn = $(".myThuOpn").val();
+    thuCls = $(".myThuCls").val();
+    friOpn = $(".myFriOpn").val();
+    friCls = $(".myFriCls").val();
+    satOpn = $(".mySatOpn").val();
+    satCls = $(".mySatCls").val();
+    satdy  = $("#satdy").val();
+    mondy  = $("#mondy").val();
+    tuedy  = $("#tuedy").val();
+    wedy   = $("#wedy").val();
+    thusdy = $("#thusdy").val();
+    frdy   = $("#frdy").val();
+    satdy   = $("#satdy").val();
+    loc_add = $(".locId").val();
+    homVist = $('input[name="hom_visit"]').prop('checked');
+    monTog = $('input[name="myMonTog"]').prop('checked');
+    tueTog = $('input[name="myTueTog"]').prop('checked');
+    wedTog = $('input[name="myWedTog"]').prop('checked');
+    thuTog = $('input[name="myThuTog"]').prop('checked');
+    friTog = $('input[name="myFriTog"]').prop('checked');
+    satTog = $('input[name="mySatTog"]').prop('checked');
+    $.ajax({
+        type: "POST",
+        url: url,
+        headers:{
+            "X-CSRFToken": '{{csrf_token}}' 
+        },
+        dataType: "json",
+        data: {"location_id":location_id,"monOpn":monOpn,"monCls":monCls,"tueOpn":tueOpn,"tueCls":tueCls,"wedOpn":wedOpn,"wedCls":wedCls,"thuOpn":thuOpn,"thuCls":thuCls,"friOpn":friOpn,"friCls":friCls,"satOpn":satOpn ,"satCls":satCls,"mondy":mondy,"tuedy":tuedy,"wedy":wedy,"thusdy":thusdy,"frdy":frdy,"satdy":satdy,"loc_add":loc_add,"homVist":homVist,"monTog":monTog,"tueTog":tueTog,"wedTog":wedTog,"thuTog":thuTog,"friTog":friTog,"satTog":satTog},
+        success: function(response) {
+                if(response.status == 200){
+                    window.location.reload()
+                   }  
+            }
+        });
+});
+
+
+$('.mobVist').attr('disabled',true);
+
+</script>
+
+<script type="text/javascript">
+function active_deactive_user(service_id,action_is) {
+    url = "/requested/user/";
+    $.ajax({
+    type: "POST",
+    url: url,
+    headers:{
+        "X-CSRFToken": '{{csrf_token}}' 
+    },
+    data: {
+        "service_id":service_id,
+        "action_is" :action_is,
+    },
+    success: function(res) {
+            if(res.status == 200){
+                alert(res.message)
+                window.location.reload();
+               }
+            else{
+                alert(res.message)
+            }
+        }
+    });
+}
+
+$(document).on("click", ".editView", function(e){
+  var des = $('#description').val();
+  var exp = $('#experience').val()
+  // des.trim();
+  // debugger 
+  if( des.trim() == "None" ){
+    $('textarea').val('')
+  }
+  if(exp.trim() == "None"){
+    $('#experience').val('')
+  }
+
+});
+</script>
+
+
+{% endblock %}

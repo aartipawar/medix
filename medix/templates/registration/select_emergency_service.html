@@ -1,0 +1,56 @@
+{% extends 'layout/layout.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+
+<main>
+    <div id="hero_register">
+        <div class="container margin_120_95">           
+            <div class="row">
+                <p>{{form.errors}}{{user_form.errors}}</p>
+                <div class="col-lg-4 ml-auto">
+                    <div class="box_form">
+                        <div id="message-register"></div>
+                        <form method="POST" role="form" enctype="multipart/form-data">{% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="emergency_services">Emergency Services</label><br>
+                                        {{form.emergency_services}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="back_btn">
+                                <a href="{% url 'users:registration-step1' %}">
+                                <input type="button" class="btn_1" value="Back" >
+                                </a>
+                            </div>
+                            <div class="back_btn">
+                                <input type="submit" class="btn_1" value="Next" id="submit-register">
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <!-- /box_form -->
+                </div>
+                <!-- /col -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /hero_register -->
+</main>
+<script>
+    $(function() {
+    var emergency_services = sessionStorage.getItem("emergency_services");
+    if(emergency_services != null) {
+        $("select[name=emergency_services]").val(emergency_services);
+    }
+    $("select[name=emergency_services]").on("change", function() {
+        sessionStorage.setItem("emergency_services", $(this).val());
+    });
+});
+</script>
+{% endblock %}

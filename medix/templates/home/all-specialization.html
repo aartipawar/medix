@@ -1,0 +1,225 @@
+{% extends 'layout/profile_layout.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+     <div class="container margin_120_95">
+            <div class="main_title">
+                <h2>Find by specialization</h2>
+                <p>Nec graeci sadipscing disputationi ne, mea ea nonumes percipitur. Nonumy ponderum oporteat cu mel, pro movet cetero at.</p>
+            </div>
+            <div class="row">
+              <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=General-Practitioner" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_1.svg" width="60" height="60" alt="">
+                        <h3>General Practitioner</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Cardiologist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_2.svg" width="60" height="60" alt="">
+                        <h3>Cardiologist</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Ophthalmologist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_3.svg" width="60" height="60" alt="">
+                        <h3>Ophthalmologist</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Dermatologist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_4.svg" width="60" height="60" alt="">
+                        <h3>Dermatologist</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Ear-Nose-Throat" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_7.svg" width="60" height="60" alt="">
+                        <h3>Ear-Nose-Throat</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Dentist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_5.svg" width="60" height="60" alt="">
+                        <h3>Dentist</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Psychologist-&-Psychiatrist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_8.svg" width="60" height="60" alt="">
+                        <h3>Psychologist & Psychiatrist</h3>
+                    </a>
+                </div>
+           
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=GeneralSurgeon" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_1.svg" width="60" height="60" alt="">
+                        <h3>General Surgeon</h3>
+                      
+                    </a>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Gynaecologist-Obstetrician" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_7.svg" width="60" height="60" alt="">
+                        <h3>Gynaecologist Obstetrician</h3>
+                       
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization'  %}?specialization=Endocrinologist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_5.svg" width="60" height="60" alt="">
+                        <h3>Endocrinologist</h3>
+                       
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization'  %}?specialization=Radiologist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_8.svg" width="60" height="60" alt="">
+                        <h3>Radiologist</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization'  %}?specialization=Nephrologist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_3.svg" width="60" height="60" alt="">
+                        <h3>Nephrologist</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization'  %}?specialization=Oncologist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_4.svg" width="60" height="60" alt="">
+                        <h3>Oncologist</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization'  %}?specialization=Paediatrist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_8.svg" width="60" height="60" alt="">
+                        <h3>Paediatric</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization'  %}?specialization=Physiotherapist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_3.svg" width="60" height="60" alt="">
+                        <h3>Physiotherapist</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Ayurvedic-Medicine" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_8.svg" width="60" height="60" alt="">
+                        <h3>Ayurvedic Medicine</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Anaesthesiologist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_8.svg" width="60" height="60" alt="">
+                        <h3>Anaesthesiologist</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Chiropractor" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_8.svg" width="60" height="60" alt="">
+                        <h3>Chiropractor</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Cosmetic-Surgeon" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_8.svg" width="60" height="60" alt="">
+                        <h3>Cosmetic Surgeon</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization'  %}?specialization=Gastroenterologist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_8.svg" width="60" height="60" alt="">
+                        <h3>Gastroenterologist</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization'  %}?specialization=Neurologist-&-NeuroSurgeon" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_5.svg" width="60" height="60" alt="">
+                        <h3>Neurologist & Neuro Surgeon</h3>
+                       
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization'  %}?specialization=Optometrics" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_5.svg" width="60" height="60" alt="">
+                        <h3>Optometrics</h3>  
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization'  %}?specialization=Orthopaedist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_5.svg" width="60" height="60" alt="">
+                        <h3>Orthopaedist</h3>  
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization'  %}?specialization=Pathologist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_5.svg" width="60" height="60" alt="">
+                        <h3>Pathologist</h3>  
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization'  %}?specialization=Pulmonologist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_5.svg" width="60" height="60" alt="">
+                        <h3>Pulmonologist</h3>  
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Podiatrist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_1.svg" width="60" height="60" alt="">
+                        <h3>Podiatrist</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Rheumatologists" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_1.svg" width="60" height="60" alt="">
+                        <h3>Rheumatologists</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Sports-Medicine-Specialist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_1.svg" width="60" height="60" alt="">
+                        <h3>Sports Medicine Specialist</h3>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <a href="{% url 'users:find-by-specialization' %}?specialization=Urologist" class="box_cat_home">
+                        <i class="icon-info-4"></i>
+                        <img src="/static/html_menu_1/img/icon_cat_1.svg" width="60" height="60" alt="">
+                        <h3>Urologist</h3>
+                    </a>
+                </div>
+            </div>
+
+
+{% endblock %}

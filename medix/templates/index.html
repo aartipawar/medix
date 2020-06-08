@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<section>
+<div class="container">                                  
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="{% url 'users:patient-registration' %}">Patient</a></li>
+      <li><a href="{% url 'users:practice-registration' %}">Practice</a></li>
+      <li><a href="{% url 'users:institution-registration' %}">Institution</a></li>
+      <li><a href="{% url 'users:emergency-service-registration' %}">Emergency Service</a></li>
+      <li><a href="{% url 'users:insurance-provider-registration' %}">Health Insurance Providers</a></li>
+    </ul>
+  </div>
+</div>
+</section>
+</body>
+</html>
+
+

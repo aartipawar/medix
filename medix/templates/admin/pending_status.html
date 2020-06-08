@@ -1,0 +1,199 @@
+{% extends 'admin/admin_base.html' %}
+  {% block content %}
+  {% load staticfiles %}
+ {% include 'admin/navigation.html' %}
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      
+        <div class="box_general">
+            <div class="header_box">
+                <h2 class="d-inline-block">Pending Status List</h2>
+            </div>
+            <div class="list_general">
+                <ul>
+                    {% for pending_user in users %}
+                    <li class="profiles">
+                        <input type="hidden" name="profile_id" id="profile_id" value="{{pending_user.pk}}">
+                        {% if  pending_user.image %}      
+                            <figure><img src="{{pending_user.image.url}}"></figure>
+                        {% elif pending_user.gender == 1 %}
+                        <figure><img src="{% static 'html_menu_1/img/female_image.jpeg' %}"></figure>
+                        {% elif pending_user.gender == 0 %}
+                        <figure><img src="{% static 'html_menu_1/img/male_image.jpeg' %}"></figure>
+                        {% elif pending_user.custom_role == 2 %}
+                        <figure><img src="{% static 'html_menu_1/img/institute.png' %}"></figure>
+                        {% elif pending_user.custom_role == 3 %}
+                        <figure><img src="{% static 'html_menu_1/img/emergency.jpeg' %}"></figure>
+                        {% elif pending_user.custom_role == 4 %}
+                        <figure><img src="{% static 'html_menu_1/img/health-insurance.png' %}"></figure>
+                        {% endif %}
+                        {% if pending_user.full_name != None %}
+                            <a href="{% url 'book' pending_user.pk %}">{{pending_user.full_name}}</a>
+                        {% endif %}
+                  {% if pending_user.get_status_display == "Active" %}
+                      <i class="approved">Active</i>
+                  {% elif pending_user.get_status_display == "Pending" %}
+                      <i class="pending">Pending</i>
+                  {% else %}
+                      <i class="cancel">Deactive</i>
+                  {% endif %}
+                        </h4>
+                        <ul class="booking_details">
+                            <li><strong>Joined date</strong> {{pending_user.created_at}}</li>
+                            {% if pending_user.emergency_services != None %}
+                                  <li><strong>Service Type</strong> {{pending_user.get_emergency_services_display}}</li>
+                            {% endif %}
+                            <li><strong>Experience</strong> {{pending_user.experience}}</li>
+                            <li><strong>Telephone</strong> {{pending_user.phone}}</li>
+                            <li><strong>Email</strong> {{pending_user.user.email}}</li>
+                        </ul>
+                    <ul class="buttons">
+                        <li><a href="#0" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> Activate</a></li>
+                      <li><a href="#0" class="btn_1 gray pending"><i class="fa fa-fw fa-times-circle-o"></i> Pending</a></li>
+                      <li><a href="#0" class="btn_1 gray delete"><i class="fa fa-fw fa-times-circle-o"></i> Dectivate</a></li>
+                    </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <!-- /box_general-->
+        <nav aria-label="...">
+        {% if users.has_other_pages %}
+          <ul class="pagination pagination-sm add_bottom_30">
+
+            {% if users.has_previous %}
+              <li>
+                <a class="page-link" href="?page={{ users.previous_page_number }}" tabindex="-1">Previous</a>
+            </li>
+            {% else %}
+              <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+            {% endif %}
+
+            {% for i in users.paginator.page_range %}
+              {% if users.number == i %}
+                <li class="active page-item">
+                    <a class="page-link" href="#">{{ i }}</a>
+                </li>
+              {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                </li>
+              {% endif %}
+
+            {% endfor %}
+
+            {% if users.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ users.next_page_number }}">Next</a>
+                </li>
+            {% else %}
+              <li class="page-item disabled">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            {% endif %}
+
+          </ul>
+        {% endif %}
+        </nav>
+
+    <!-- /pagination-->
+      </div>
+      <!-- /container-fluid-->
+    </div>
+    <!-- /container-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Copyright © FinDoctor 2017</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="/myadmin/logout/">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+     {% block js %}
+    <!-- Bootstrap core JavaScript-->
+    <script src="/static/admin_section/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/admin_section/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/static/admin_section/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="/static/admin_section/vendor/chart.js/Chart.min.js"></script>
+    <script src="/static/admin_section/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/static/admin_section/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="/static/admin_section/vendor/jquery.selectbox-0.2.js"></script>
+    <script src="/static/admin_section/vendor/retina-replace.min.js"></script>
+    <script src="/static/admin_section/vendor/jquery.magnific-popup.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/static/admin_section/js/admin.js"></script>
+
+  {% endblock %}
+
+  <script type="text/javascript">
+    $(document).on("click", ".approve", function(e){
+        e.preventDefault();
+        profile_id = $(this).parents(".profiles").find("#profile_id").val();
+        // Call Common Function here
+        active_deactive_user(profile_id,"activate");
+    });
+  </script>
+
+  <script type="text/javascript">
+    $(document).on("click", ".delete", function(e){
+        e.preventDefault();
+        profile_id = $(this).parents(".profiles").find("#profile_id").val();
+        // Call Common Function here
+        active_deactive_user(profile_id,"deactivate");
+    });
+  </script>
+
+<script type="text/javascript">
+function active_deactive_user(profile_id,action_is) {
+    url = "/myadmin/activate_user/";
+    $.ajax({
+    type: "POST",
+    url: url,
+    headers:{
+        "X-CSRFToken": '{{csrf_token}}' 
+    },
+    data: {
+        "profile_id":profile_id,
+        "action_is" :action_is,
+    },
+    success: function(res) {
+            if(res.status == 200){
+                alert(res.message)
+                window.location.reload();
+               }
+            else{
+                alert(res.message)
+            }
+        }
+    });
+}
+</script>
+{% endblock %}

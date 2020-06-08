@@ -1,0 +1,178 @@
+{% extends 'layout/profile_layout.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+<main>
+   <div id="results">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6">
+               <div class="search_bar_list">
+                  <input type="text" class="form-control" placeholder="Ex. Specialist, Name, Doctor...">
+                  <input type="submit" value="Search">
+               </div>
+            </div>
+         </div>
+         <!-- /row -->
+      </div>
+      <!-- /container -->
+   </div>
+   <!-- /results -->
+   <div class="container margin_60_35">
+      <div class="row">
+         <div class="col-lg-7">
+            {% for user in specialization %}
+            <div class="strip_list wow fadeIn">
+               <div id="share-wrapper text_align" style="position: absolute; right: 12px;">
+                  <i data-toggle="tooltip" data-placement="left" title="Click to share" class="fa fa-share-alt sharebtntik" id="share"></i>
+                  <ul class="sharebtnlisting menutext_align">
+                     <!-- facebook -->
+                     <li>
+                        <a id="share-facebook" class="mb-2 d-flex justify-content-center align-items-center" href="{% url 'social:begin' 'facebook' %}" data-toggle="tooltip" data-placement="left" title="Share this page!">
+                        <i class="fab fa-facebook-f"></i>
+                        </a>
+                     </li>
+                     <!-- twitter -->
+                     <li>
+                        <a id="share-twitter" class="mb-2 d-flex justify-content-center align-items-center tw" href="https://twitter.com/share?url=URLTOSHARE" data-toggle="tooltip" data-placement="left" title="Tweet this page!">
+                        <i class="fab fa-twitter"></i>
+                        </a>
+                     </li>
+                     <!-- linkedin -->
+                     <li onclick="copyToClipboard('#user{{ user.id }}')">
+                        <p style="display:none" id="user{{ user.id }}">http://18.218.141.80/profile-detail/{{ user.id }}</p>
+                        <a id="share-linkedin" class="mb-2 d-flex justify-content-center align-items-center li" data-toggle="tooltip" data-placement="left" title="Share this page!">
+                        <img src="{% static 'html_menu_1/img/copy_link_image.png' %}"/>
+                        </a>
+                     </li>
+                     <!-- pocket -->
+                     <li>
+                        <div class="popup_main share_popup">
+                           <a id="share-pocket" class="mb-2 d-flex justify-content-center align-items-center li open_popup" data-toggle="tooltip" data-placement="left" title="Share this page!">
+                           <i class="fab fa-get-pocket"></i>
+                           </a>
+                           <div class="popup_body">
+                              <div class="popup_back"></div>
+                              <div class="popup_contain popup_width">
+                                 <div class="popuptitle text_alignleft">
+                                    Sms Sharing
+                                    <div class="
+                                       popup_close">x</div>
+                                 </div>
+                                 <div class="popupbody text_alignleft">
+                                    <input type="hidden" class="form-control col-md-4" name="drurl" id="drurl" value="{% url 'users:book' user.pk %}" >
+                                    <label>To</label>
+                                    <input type="text" class="form-control col-md-4" name="sendto" id="sendto" placeholder="Ex.+919779601580" size="100" ><br><br>  
+                                 </div>
+                                 <div class="popupfooter">
+                                    <button data-url="{% url 'users:send_sms' %}" class="sendSms save_btncss">Send</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+               <figure>
+                  <a href="{% url 'users:book' user.pk %}">
+                     <div class="avatar-preview">
+                        {% if  user.image %}      
+                        <img src="{{user.image.url}}">
+                        {% elif user.gender == 1 %}
+                        <img src="{% static 'html_menu_1/img/female_image.jpeg' %}">
+                        {% elif user.gender == 0 %}
+                        <img src="{% static 'html_menu_1/img/male_image.jpeg' %}">
+                        {% endif %}
+                     </div>
+                  </a>
+               </figure>
+               <small>{{user.get_practice_display}}</small>
+               <h3>{{user.user.first_name}}</h3>
+               <h3>{{user.user.last_name}}</h3>
+               <p>{{user.description}}</p>
+               <p>Year Of Experience - {{user.experience}}</p>
+            </div>
+            {% endfor %}
+            <!-- /pagination -->
+         </div>
+         <!-- /col -->
+         <!--<aside class="col-lg-5" id="sidebar">
+            <div id="map_listing" class="normal_list">
+            </div>
+            </aside>-->
+         <!-- /aside -->
+      </div>
+      <!-- /row -->
+   </div>
+   <!-- /container -->
+</main>
+<!-- /main -->
+<div id="toTop"></div>
+<!-- Back to top button -->
+<script type="text/javascript">
+   $(".open_popup").click(function () {
+   $(this).parent(".popup_main").children(".popup_body").addClass("popup_body_show");
+   });
+   $(".popup_close").click(function () {
+   $(".popup_body").removeClass("popup_body_show");
+   });
+   $(".popup_back").click(function () {
+   $(".popup_body").removeClass("popup_body_show");
+   });
+   
+   
+   $(document).on("click", ".sendSms", function(e){
+   e.preventDefault();
+   url = $(this).data('url');
+   drUrl = $("#drurl").val();
+   sendTo = $("#sendto").val();
+   $.ajax({
+       type: "POST",
+       url: url,
+       headers:{
+           "X-CSRFToken": '{{csrf_token}}' 
+       },
+       dataType: "json",
+       data: {"sendTo":sendTo,'drUrl':drUrl},
+       success: function(response) {
+           if(response.status == 200){
+               window.location.reload()
+               alert(response.message)
+              }  
+           }
+       });
+   });
+   
+</script>
+<script type="text/javascript"> 
+   function copyToClipboard(element) {
+     var $temp = $("<input>");
+     $("body").append($temp);
+     $temp.val($(element).text()).select();
+     document.execCommand("copy");
+     $temp.remove();
+   }
+   
+   
+   $('.copy_link').click(function(){
+    var user_link = $(this).children("input");
+    user_link.select();
+   });
+    
+</script>
+<script type="text/javascript">
+   $('[data-toggle="tooltip"]').tooltip();
+</script>
+<script type="text/javascript">
+   $(".sharebtntik").click(function(){
+    //alert("hi");
+    //$(this)parent.find.toggleClass('classOne');
+    //alert("hi");
+    $(this).parent().find('.sharebtnlisting').toggleClass("in");
+        //$(".sharebtnlisting")
+   });
+</script>
+{% endblock %}

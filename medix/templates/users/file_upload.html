@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+{% if messages %}
+  {% for message in messages %}
+      <p {% if message.tags %} class="{{message.tags}}" {% endif %}>{{ message }}</p>
+  {% endfor %}
+  <script type="text/javascript">
+      setTimeout(function(){
+      $(".success").hide();
+      $(".error").hide();  
+      }, 5000);
+  </script>
+{% endif %}
+<body style="background: #3f4079 url(../img/hero_bg_1.svg) repeat fixed;color: #555;padding: 200px 0;">
+    
+    <div class="email_div" style="margin: 0 auto;text-align: center;background: #fff;width: 500px;
+    border-radius: 4px;">
+    
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+    </form>
+    </div>
+</body>
+</html>

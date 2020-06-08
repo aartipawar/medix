@@ -1,0 +1,32 @@
+{% extends 'layout/layout.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+<style type="text/css">
+    
+</style>
+
+
+<main>
+    <div class="bg_color_2">
+      <div class="container margin_60_35">
+        <div id="login-2">
+          {% if messages %}
+      {% for message in messages %}
+      <p {% if message.tags %} class="{{message.tags}}" {% endif %}>{{ message }}</p>
+      {% endfor %}
+      
+      </script>
+      {% endif %}
+          <h1></h1><br><br>
+          
+          
+        </div>
+        <!-- /login -->
+      </div>
+    </div>
+  </main>
+  <!-- /main -->
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'layout/layout.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+      <p {% if message.tags %} class="{{message.tags}}" {% endif %}>{{ message }}</p>
+  {% endfor %}
+  <script type="text/javascript">
+      setTimeout(function(){
+      $(".success").hide();
+      $(".error").hide();  
+      }, 5000);
+  </script>
+{% endif %}
+<main>
+    <div id="hero_register">
+        <div class="container margin_120_95">           
+            <div class="row">
+                <p>{{service_form.errors}}{{user_form.errors}}</p>
+                
+                <div class="col-lg-5 ml-auto">
+                    <div class="box_form">
+                        <div id="message-register"></div>
+                        <form method="POST" role="form" enctype="multipart/form-data">{% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-12 form_field">
+                                    <div class="form-group">
+                                        <label for="trading_name">Trading Name</label><br>
+                                        {{service_form.trading_name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+                            <div class="row">
+                                <div class="col-lg-12 form_field">
+                                    <div class="form-group">
+                                        <label for="Username">Username</label><br>
+                                        {{user_form.username}}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+                            <div class="row">
+                                <div class="col-md-12 form_field">
+                                    <div class="form-group">
+                                        <label for="gender">Address Of Institution</label><br>
+                                        {{service_form.address_of_institution |add_class:"textarea_field"}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 form_field">
+                                    <div class="form-group">
+                                        <label for="gender">Contact Person</label><br>
+                                        {{service_form.contact_person}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 form_field">
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label><br>
+                                        {{service_form.phone}}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row -->
+                            <div class="row">
+                                <div class="col-lg-12 form_field">
+                                    <div class="form-group">
+                                        <label for="email">Email</label><br>
+                                        {{user_form.email}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 form_field">
+                                    <div class="form-group">
+                                        <label for="password">Password</label><br>
+                                        {{user_form.password}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 checkbox_form">
+                                    <div class="form-group">
+                                        <p><input type="checkbox" name="accept" required>Agree to Terms of use checkbox</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="back_btn">
+                                
+                                <a href="{% url 'users:select-emergency-service' %}">
+                                <input type="button" class="btn_1" id="btn" value="Back" >   
+                                </a>  
+                               
+                            </div>
+                            <div class="back_btn">
+                                <input type="submit" class="btn_1" value="Submit" id="submit-register">
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <!-- /box_form -->
+                </div>
+                <!-- /col -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /hero_register -->
+</main>
+<script>
+    $('#btn').click(function(){
+        $(this).data('clicked', true);
+    });
+</script>
+{% endblock %}
