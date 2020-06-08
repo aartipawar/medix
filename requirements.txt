@@ -3,7 +3,7 @@ cffi==1.14.0
 chardet==3.0.4
 cryptography==2.9.2
 defusedxml==0.7.0rc1
-Django==2.1
+Django==2.2.13
 django-betterforms==1.2
 django-widget-tweaks==1.4.3
 gunicorn==19.9.0
